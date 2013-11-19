@@ -25,7 +25,7 @@ assert bottles(3) == """2 bottles of beer on the wall, 2 bottles of beer.Take on
 """
 
 def gematria(word):
-    mapa = {'a':1, 'b':2, 'c':3}
+    mapa = {'a':1, 'b':2, 'c':3} # and so on..
     counter = 0
     for c in word:
         counter += mapa[c]
@@ -33,6 +33,12 @@ def gematria(word):
 
 assert gematria("abb") == 5
 
+def palindrome(word):
+    return word == word[::-1]
+    
+assert palindrome("aba") == True
+assert palindrome("ima") == False
+    
 from bottle import route, run, template, view, static_file
 
 @route('/static/<path:path>')
