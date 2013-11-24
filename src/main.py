@@ -1,4 +1,5 @@
 # coding: utf-8
+import cgi
 
 def helloWorld():
     return "Hello World"
@@ -83,6 +84,18 @@ def htmlList(text, ordered):
 
 assert htmlList("a\nb\nc\n", True) == "<ol><li>a</li><li>b</li><li>c</li><li></li></ol>"
 
+def htmlTable(doubleList):
+    html = "<table>"
+    for singleList in doubleList:
+        html += "<tr>"
+        for field in singleList:
+            html += "<td>%s</td>" % cgi.escape(field)
+        html += "</tr>"
+        
+    html += "</table>"
+    return html
+
+assert htmlTable([["a", "&"], ["c", "d"]]) == "<table><tr><td>a</td><td>&amp;</td></tr><tr><td>c</td><td>d</td></tr></table>"
 
 
 from bottle import route, run, template, view, static_file
